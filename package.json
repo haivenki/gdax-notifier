@@ -19,7 +19,12 @@
   },
   "homepage": "https://github.com/leon-do/gdax-notifier#readme",
   "dependencies": {
+    "es6-promise": "^4.1.1",
+    "fetch": "^1.1.0",
     "gdax": "^0.4.2",
-    "nodemailer": "^4.0.1"
+    "isomorphic-fetch": "^2.2.1",
+    "nodemailer": "^4.0.1",
+    "websocket": "^1.0.24",
+    "ws": "^3.0.0"
   }
 }
