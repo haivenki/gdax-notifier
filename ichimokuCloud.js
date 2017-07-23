@@ -21,13 +21,16 @@ fetchUrl("https://api.cryptowat.ch/markets/gdax/ethusd/ohlc", function(error, me
     // const kijunSen = senLine(data, 60)
     // const SMA = simpleMovingAverage(data, 60)
 
-    const oneDay    = senLine(data, 1)
-    const oneWeek   = senLine(data, 7)
-    const oneMonth  = senLine(data, 30)
-    const twoMonths = senLine(data, 60)
+    //senLine(data, total days, key in object)
 
+    const hourly    = senLine(data, 24, 3600)
+    const daily    = senLine(data, 1, 86400)
+    const oneWeek   = senLine(data, 7, 86400)
+    const oneMonth  = senLine(data, 30, 86400)
+    const twoMonths = senLine(data, 60, 86400)
 
-    console.log(oneDay)
+    console.log(hourly)
+    console.log(daily)
     console.log(oneWeek)
     console.log(oneMonth)
     console.log(twoMonths)
@@ -35,9 +38,9 @@ fetchUrl("https://api.cryptowat.ch/markets/gdax/ethusd/ohlc", function(error, me
 
 
 // senLine calculates the mid point of the high-low range
-function senLine(data, maxDays){
+function senLine(data, maxDays, seconds){
     let line = days = 0
-    let index = data['result']['86400'].length - 1
+    let index = data['result'][seconds].length - 1
 
     while (days < maxDays){
 
@@ -45,8 +48,8 @@ function senLine(data, maxDays){
         // console.log(data['result']['86400'][index])
         // console.log('\n')
 
-        let high = data['result']['86400'][index][2]
-        let low  = data['result']['86400'][index][3]
+        let high = data['result'][seconds][index][2]
+        let low  = data['result'][seconds][index][3]
         let midPoint = ( high + low ) / 2
         line = line + midPoint
 
